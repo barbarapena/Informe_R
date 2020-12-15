@@ -68,7 +68,7 @@ Library constructions were performed using the TruSeq RNA Library Prep Kit (Illu
 ### De-novo assembly and protein annotation
 In a previous work with transcriptomic data (Undurraga et al., unpublish), we developed a de-novo assembly pipeline \@ref(fig:pipeline), and we assembled de-novo transcriptomes from 32 plant species from the Atacama Desert, including *Aristida Adscensionis*, *Jarava frigida* and *Nassella nardoides* transcriptomes. However, data obtained from the experiment explained in \@ref(fig:Exp), indicate the presence of transcriptomic data no included in the transcriptome assembled previously (the mapping back percentages of the reads obtained from the experiment shown in \@ref(fig:Exp) were lower than 25% per sample). To incorporate the new transcriptomic data, we de-novo assembled a transcriptome of each three grass species. 
 
-Briefly, we tested the quality of the reads using FastQC-v0.11.5 and MultiQC-v1.7 software, using default parameters. We eliminated lower quality and adaptor sequence with Trimmomatic-v0.39 ([@bolger2014trimmomatic]) using the following parameters: LEADING=20, TRAILING=20; SLIDINGWINDOW=10:30; MINLEN=50; ACGQUAL=25; ILLUMINACLIP: TruSeq3-PE. After this process, we retested the quality of surviving sequences with FastQC-v0.11.5 and MultiQC-v1. 7software. We assemble de-novo the transcriptome of *Aristida adscensionis*, *Jarava frigida*, and *Nassella nardoides* using 30 samples per species (Fig\@ref(fig:Supl1)) with Bridger assembler (v.2014-12-01) using min_kmer_coverage= 5 and pair-end sequence. The completeness of the transcriptome was evaluated using BUSCO ([bolger2014trimmomatic]). With Transdecoder-v 5.5.0 (Hass et al., 2013), we predict the protein sequences from the contigs assembled, and we eliminate the protein redundancy using CD-HIT-v4.7 ([@fu2012cd]) using as criteria of 90% identity as clustering threshold.
+Briefly, we tested the quality of the reads using FastQC-v0.11.5 and MultiQC-v1.7 software, using default parameters. We eliminated lower quality and adaptor sequence with Trimmomatic-v0.39 ([@bolger2014trimmomatic]) using the following parameters: LEADING=20, TRAILING=20; SLIDINGWINDOW=10:30; MINLEN=50; ACGQUAL=25; ILLUMINACLIP: TruSeq3-PE. After this process, we retested the quality of surviving sequences with FastQC-v0.11.5 and MultiQC-v1. 7software. We assemble de-novo the transcriptome of *Aristida adscensionis*, *Jarava frigida*, and *Nassella nardoides* using 30 samples per species with Bridger assembler (v.2014-12-01) using min_kmer_coverage= 5 and pair-end sequence. The completeness of the transcriptome was evaluated using BUSCO ([bolger2014trimmomatic]). With Transdecoder-v 5.5.0 (Hass et al., 2013), we predict the protein sequences from the contigs assembled, and we eliminate the protein redundancy using CD-HIT-v4.7 ([@fu2012cd]) using as criteria of 90% identity as clustering threshold.
 
 To annotate the clustered protein, we used the Uniprot and TAIR databases to obtain the protein description by homology search using BLASTX, with a cut-off for the e-value < 1e-10. Additionally, we used GO terms to annotate functionally the transcriptomes obtained using InterProScan-v5.35 ([@jones2014interproscan]) software, and Uniprot and TAIR databases. 
  
@@ -86,7 +86,7 @@ knitr::include_graphics("pipeline_DEG.png")
 
 ## Results and Discusion
 
-The statistical data, completeness, mapping back, and annotation data obtained from the transcriptomes obtained are shown in _______-
+The statistical data, completeness, mapping back, and annotation data obtained from the transcriptomes obtained are shown in Table \@ref(fig:Tablaensambles)
 
 *N. nardoides* de-novo transcriptome obtained doubling the contig content of *J. frigida* and *A. adscensionis* transcriptome. Mean percentage of read mapped back to the clustered transcriptomes was of 69% to *J. frigida*, 65% to *N. nardoides* and 73% to *A. adscensionis*.  The annotation with Gen Ontology terms using Uniprot Swissport database, TAIR data base and InterproScan software was of 58% to *J. frigida*, 53% to *N. nardoides* and 59% to *A. adscensionis*.  
 
@@ -301,7 +301,7 @@ N_s_dds_600<- DESeqDataSetFromTximport(N_s_txi,
 
 
 We estimate the transcript abundance using Salmon-v0.13.1 and ‘DESeq2’ package to analyze the Differential Expressed Genes (DEG), using as reference the filter transcriptomes (without no plant sequence) of each species. 
-DEG analysis was done separately for shoot and root.  Counts normalization for DEG analysis involved the elimination of contig with a low number of read mapping back (Table 2), using differentially filtering criteria to root and shoot tissue. In libraries from *A. adscensionis* and *J. frigida*, contigs with <600 reads mapped back in libraries from root tissue were eliminated, meanwhile contig with <200 reads mapped back were eliminated from shoot tissue libraries. In libraries from *N. nardoides*, contigs with <600 reads mapped back in libraries from both tissues were eliminated. The number of contig that survived the filtering process correspond close to 20% of total transcript of *A. adscensionis* and *J. frigida*, meanwhile in *N. nardoides* the transcript surviving percentage was close to de 10% (Table 2). Box plot with raw and normalized libraries are shown in Figure 4, 5, and 6. 
+DEG analysis was done separately for shoot and root.  Counts normalization for DEG analysis involved the elimination of contig with a low number of read mapping back (Table 2), using differentially filtering criteria to root and shoot tissue. In libraries from *A. adscensionis* and *J. frigida*, contigs with <600 reads mapped back in libraries from root tissue were eliminated, meanwhile contig with <200 reads mapped back were eliminated from shoot tissue libraries. In libraries from *N. nardoides*, contigs with <600 reads mapped back in libraries from both tissues were eliminated. The number of contig that survived the filtering process correspond close to 20% of total transcript of *A. adscensionis* and *J. frigida*, meanwhile in *N. nardoides* the transcript surviving percentage was close to de 10% (Table \@ref(tab:contig)). Box plot with raw and normalized libraries are shown in \@ref(fig:Boxplot_Norm_Aads), \@ref(fig:Boxplot_Norm_Jfri) and \@ref(fig:Boxplot_Norm_Nnar)  
 </div>
 
 
@@ -470,7 +470,7 @@ N_DEG_UP_S_24h_0.01<-nrow(N_UP_24_S)
 
 ```
 
-The number of DEG with a Log2 Fold Change >=1 and Q-value>=0.01 was differential in the different species and their tissues (Table 3). *J. frigida* presented the highest number of DEG, meanwhile *N. nardoides* presented the lowest number of DEG.  We found a higher number of DEG after 2 hours than 24 hours of the treatment with ammonium nitrate: a total of `r A_DEG_UP_R_2h_0.01 + A_DEG_UP_S_2h_0.01` genes differentially expressed (`r A_DEG_UP_R_2h_0.01` in root and `r A_DEG_UP_S_2h_0.01` in shoot) in *A. adscensionis*; `r J_DEG_UP_R_2h_0.01 + J_DEG_UP_S_2h_0.01` genes differentially expressed (`r J_DEG_UP_R_2h_0.01` in root and `r J_DEG_UP_S_2h_0.01` in shoot) in *J. frigida* and `r N_DEG_UP_R_2h_0.01 + N_DEG_UP_S_2h_0.01` genes (`r N_DEG_UP_R_2h_0.01` in root and `r N_DEG_UP_S_2h_0.01` in shoot) in *N. nardoides*. After 24 hours of the treatment a total of  `r A_DEG_UP_R_24h_0.01 + A_DEG_UP_S_24h_0.01` (`r A_DEG_UP_R_24h_0.01` in root and `r A_DEG_UP_S_24h_0.01` in shoot) genes differentially expressed were found in *A. adscensionis*,  `r J_DEG_UP_R_24h_0.01 + J_DEG_UP_S_24h_0.01` genes differentially expressed (`r J_DEG_UP_R_24h_0.01` in root and `r J_DEG_UP_S_24h_0.01` in shoot) in *J. frigida*; and  `r N_DEG_UP_R_24h_0.01 + N_DEG_UP_S_24h_0.01` (`r N_DEG_UP_R_24h_0.01` in root and `r N_DEG_UP_S_24h_0.01` in shoot) genes in *N. nardoides*. In supplementary fig 2 are shown volcano plots of DEG for all three species.
+The number of DEG with a Log2 Fold Change >=1 and Q-value>=0.01 was differential in the different species and their tissues (Table 3). *J. frigida* presented the highest number of DEG, meanwhile *N. nardoides* presented the lowest number of DEG.  We found a higher number of DEG after 2 hours than 24 hours of the treatment with ammonium nitrate: a total of `r A_DEG_UP_R_2h_0.01 + A_DEG_UP_S_2h_0.01` genes differentially expressed (`r A_DEG_UP_R_2h_0.01` in root and `r A_DEG_UP_S_2h_0.01` in shoot) in *A. adscensionis*; `r J_DEG_UP_R_2h_0.01 + J_DEG_UP_S_2h_0.01` genes differentially expressed (`r J_DEG_UP_R_2h_0.01` in root and `r J_DEG_UP_S_2h_0.01` in shoot) in *J. frigida* and `r N_DEG_UP_R_2h_0.01 + N_DEG_UP_S_2h_0.01` genes (`r N_DEG_UP_R_2h_0.01` in root and `r N_DEG_UP_S_2h_0.01` in shoot) in *N. nardoides*. After 24 hours of the treatment a total of  `r A_DEG_UP_R_24h_0.01 + A_DEG_UP_S_24h_0.01` (`r A_DEG_UP_R_24h_0.01` in root and `r A_DEG_UP_S_24h_0.01` in shoot) genes differentially expressed were found in *A. adscensionis*,  `r J_DEG_UP_R_24h_0.01 + J_DEG_UP_S_24h_0.01` genes differentially expressed (`r J_DEG_UP_R_24h_0.01` in root and `r J_DEG_UP_S_24h_0.01` in shoot) in *J. frigida*; and  `r N_DEG_UP_R_24h_0.01 + N_DEG_UP_S_24h_0.01` (`r N_DEG_UP_R_24h_0.01` in root and `r N_DEG_UP_S_24h_0.01` in shoot) genes in *N. nardoides*. 
 
 
 
@@ -489,17 +489,17 @@ kable(DEG, caption="Total contig number with a Log~2~ Fold Change>= 1 and Q-valu
 ```
 
 
-From the list of DEG of each species, tissue, and time, we select the first 10 contigs with the higher Log2 Fold Change. The annotation of these genes (using TAIR and Uniprot database) are shown in Tables 4, 5, 6 and 6. 
+From the list of DEG of each species, tissue, and time, we select the first 10 contigs with the higher Log2 Fold Change. The annotation of these genes (using TAIR and Uniprot database) are shown in Fig 7, 8, 9 and 10. 
 In *J. frigida* selected contigs, comp35664 contig was found in all conditions and times as differentially expressed, with a high Log2 Fold Changes. The annotation of this gene indicates a phosphoribosylamine-glycine ligase activity, related with adenine biosynthesis.  
 
-```{r,root2, fig.cap="**Fig. 5. Annotation of top 10 contig with the highest Log2 Fold Change in root tissue after 2 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
+```{r,root2, fig.cap="**Fig. 7. Annotation of top 10 contig with the highest Log2 Fold Change in root tissue after 2 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
 knitr::include_graphics("Imagen2.png")
 ```
 
 
 In root at 2 hours after the treatment, we found contig with transcriptional related response all the three species, that is an expected response to a treatment that contain a valuable mineral nutrient. At the 24 hours after the treatment, we found proteins related with sugar and lipids metabolisms in *A. adscensionis* and *N. nardoides* contigs root, that suggest an increase in the energy demand in the root and an increase in the local metabolisms.  The only protein related to a metabolism of nitrogen compounds, was found in root tissue after 24 hours of treatment in *N. nardoides* selected contigs.
 
-```{r,root24, fig.cap="**Fig. 6. Annotation of top 10 contig with the highest Log2 Fold Change in root tissue after 24 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
+```{r,root24, fig.cap="*Fig. 8. Annotation of top 10 contig with the highest Log2 Fold Change in root tissue after 24 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
 knitr::include_graphics("Imagen3.png")
 
 ```
@@ -508,12 +508,12 @@ In the shoot selected contigs, we found proteins related with cytoskeleton reord
 In *A. adscensionis* shoot selected contig at 24 hours after the treatment, we found two putative proteins related with transposon activity. The only protein related to a metabolism of nitrogen compounds, was found in root tissue after 24 hours of treatment in *N. nardoides* selected contigs. We found proteins related with a Ca2+ modulation in *N. nardoides* root contigs at 2 hours and 24 hours after the treatment. In in shoot contigs after 2 hours of treatment, these related proteins were found in *A. adscensionis* and *J. frigida* selected contig.
 
 
-```{r,shoot2, fig.cap="**Fig. 7. Annotation of top 10 contig with the highest Log2 Fold Change in shoot tissue after 2 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
+```{r,shoot2, fig.cap="**Fig. 9. Annotation of top 10 contig with the highest Log2 Fold Change in shoot tissue after 2 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
 knitr::include_graphics("Imagen4.png")
 
 ```
 
-```{r,shoot24, fig.cap="**Fig. 7. Annotation of top 10 contig with the highest Log2 Fold Change in shoot tissue after 24 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
+```{r,shoot24, fig.cap="**Fig. 10. Annotation of top 10 contig with the highest Log2 Fold Change in shoot tissue after 24 hours of treatment**", out.width="700px", echo=F, fig.align="center"}
 knitr::include_graphics("Imagen5.png")
 
 ```
@@ -525,7 +525,4 @@ The transcriptional response was similar in roots after 2 and 24 hours of treatm
 
 
 ## Bibliografía
-
-
-
 
