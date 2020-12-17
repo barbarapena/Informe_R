@@ -96,8 +96,8 @@ knitr::include_graphics("Tabla_ensambles.png")
 ```
 
 
-
 ```{r, Metadata_DEG_Aads}
+
 ###Metadata
 
 samples<- read.delim2("samples.txt", header=T)
@@ -480,7 +480,7 @@ Tissue_DEG <- as.factor(rep(c("Root", "Shoot"),1))
 Species_DEG <- as.factor(rep(c("*A. adscensionis*", "*J. frigida*", "*N. nardoides*"), each =2))
 Number_DEG <- c(A_DEG_UP_R_2h_0.01, A_DEG_UP_S_2h_0.01, J_DEG_UP_R_2h_0.01, J_DEG_UP_S_2h_0.01, N_DEG_UP_R_2h_0.01, N_DEG_UP_S_2h_0.01, A_DEG_UP_R_24h_0.01, A_DEG_UP_S_24h_0.01, J_DEG_UP_R_24h_0.01, J_DEG_UP_S_24h_0.01, N_DEG_UP_R_24h_0.01, N_DEG_UP_S_24h_0.01)
 
-DEG<- data.frame(c(Time, Tissue_DEG, Species_DEG, Number_DEG))
+DEG<- data.frame((Time_DEG, Tissue_DEG, Species_DEG, Number_DEG))
 
 ```
 
